@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import styles from './page.module.css';
-import { FiMenu, FiSearch, FiUser, FiHeart, FiMoon, FiSun } from 'react-icons/fi';
+import { FiMenu, FiSearch, FiUser, FiHeart, FiMoon, FiSun, FiX } from 'react-icons/fi';
 import { AiFillStar } from 'react-icons/ai';
 import QualityBadge from './components/QualityBadge';
 
@@ -13,6 +13,7 @@ export default function ProductPage() {
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
   const [theme, setTheme] = useState<Theme>('light');
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -40,6 +41,9 @@ export default function ProductPage() {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   };
 
+  const toggleMobileNav = () => setIsMobileNavOpen(prev => !prev);
+  const closeMobileNav = () => setIsMobileNavOpen(false);
+
   const incrementQuantity = () => setQuantity(prev => Math.min(prev + 1, 49));
   const decrementQuantity = () => setQuantity(prev => Math.max(prev - 1, 1));
 
@@ -56,10 +60,21 @@ export default function ProductPage() {
           <img src="/logo.png" alt="Mom's Pure Grind" className={styles.logoImage} />
         </div>
 
-        <button className={styles.categoryButton}>
-          <FiMenu size={20} />
-          All Products
-        </button>
+        <div className={styles.ctaGroup}>
+          <button className={styles.categoryButton}>
+            <FiMenu size={20} />
+            All Products
+          </button>
+
+          <button
+            className={styles.mobileNavToggle}
+            type="button"
+            aria-label={isMobileNavOpen ? 'Close menu' : 'Open menu'}
+            onClick={toggleMobileNav}
+          >
+            {isMobileNavOpen ? <FiX size={20} /> : <FiMenu size={20} />}
+          </button>
+        </div>
 
         <div className={styles.searchContainer}>
           <input
@@ -72,11 +87,11 @@ export default function ProductPage() {
           </button>
         </div>
 
-        <nav className={styles.nav}>
-          <a href="#" className={styles.navLink}>Home</a>
-          <a href="#" className={styles.navLink}>Products</a>
-          <a href="#" className={styles.navLink}>Shops</a>
-          <a href="#" className={styles.navLink}>Offers</a>
+        <nav className={`${styles.nav} ${isMobileNavOpen ? styles.navOpen : ''}`}>
+          <a href="#" className={styles.navLink} onClick={closeMobileNav}>Home</a>
+          <a href="#" className={styles.navLink} onClick={closeMobileNav}>Products</a>
+          <a href="#" className={styles.navLink} onClick={closeMobileNav}>Shops</a>
+          <a href="#" className={styles.navLink} onClick={closeMobileNav}>Offers</a>
         </nav>
 
         <div className={styles.userSection}>
@@ -95,6 +110,15 @@ export default function ProductPage() {
           </button>
         </div>
       </header>
+
+      {isMobileNavOpen && (
+        <button
+          type="button"
+          aria-label="Close navigation"
+          className={styles.mobileNavBackdrop}
+          onClick={closeMobileNav}
+        />
+      )}
 
       {/* Product Section */}
       <main className={styles.productSection}>
