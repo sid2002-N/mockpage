@@ -1,0 +1,238 @@
+/* VERSION 7.2 - Ayurvedic Elegance (Playfair + Realistic Dew) */
+.qualityBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.7rem 1.4rem;
+  background: 
+    linear-gradient(135deg, 
+      rgba(107, 155, 78, 0.2) 0%, 
+      rgba(85, 139, 47, 0.15) 50%,
+      rgba(107, 155, 78, 0.25) 100%),
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+  backdrop-filter: blur(16px) saturate(160%) brightness(1.05);
+  -webkit-backdrop-filter: blur(16px) saturate(160%) brightness(1.05);
+  border: 1.5px solid rgba(107, 155, 78, 0.35);
+  border-radius: 50px 45px 50px 45px; /* Slightly organic shape */
+  margin-bottom: 0.5rem;
+  box-shadow: 
+    0 4px 16px rgba(85, 139, 47, 0.2),
+    0 2px 6px rgba(0, 0, 0, 0.05),
+    0 0 30px rgba(107, 155, 78, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  animation: organicBreath 5s ease-in-out infinite;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 3. Breathing & Floating Animation */
+@keyframes organicBreath {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    border-radius: 50px 45px 50px 45px;
+  }
+  50% {
+    transform: translateY(-3px) scale(1.02);
+    border-radius: 45px 50px 45px 50px;
+  }
+}
+
+/* 1. Leaf Texture Overlay (Noise) */
+.qualityBadge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 6. Incense Smoke Effect */
+.qualityBadge::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle at 50% 50%, 
+    rgba(255, 255, 255, 0.15) 0%, 
+    transparent 40%);
+  filter: blur(20px);
+  animation: smokeFlow 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes smokeFlow {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(20%, -20%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* 2. Realistic Dew Drops */
+.badgeContent::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  right: 8px;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50% 50% 50% 50%;
+  box-shadow: 
+    inset 1px 1px 2px rgba(255, 255, 255, 0.9), /* Specular highlight */
+    inset -1px -1px 2px rgba(0, 0, 0, 0.1), /* Inner shadow */
+    1px 1px 2px rgba(0, 0, 0, 0.15); /* Drop shadow */
+  opacity: 0;
+  animation: dewDrop 5s ease-in-out infinite;
+}
+
+.badgeContent::after {
+  content: '';
+  position: absolute;
+  bottom: 1px;
+  left: 12px;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  box-shadow: 
+    inset 1px 1px 2px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.1),
+    1px 1px 2px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  animation: dewDrop 5s ease-in-out infinite 2.5s;
+}
+
+@keyframes dewDrop {
+  0%, 100% { opacity: 0; transform: scale(0.8); }
+  20% { opacity: 0.9; transform: scale(1.1); }
+  80% { opacity: 0.9; transform: scale(1.1); }
+}
+
+.qualityBadge:hover {
+  background: 
+    linear-gradient(135deg, 
+      rgba(107, 155, 78, 0.3) 0%, 
+      rgba(85, 139, 47, 0.2) 50%,
+      rgba(107, 155, 78, 0.35) 100%);
+  backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+  box-shadow: 
+    0 8px 24px rgba(85, 139, 47, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 0 40px rgba(107, 155, 78, 0.25),
+    inset 0 1px 3px rgba(255, 255, 255, 0.4);
+  transform: translateY(-4px) scale(1.03);
+  border-color: rgba(107, 155, 78, 0.5);
+}
+
+.badgeContent {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 2;
+}
+
+.badgeIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: 
+    linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  box-shadow: 
+    0 3px 10px rgba(85, 139, 47, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.qualityBadge:hover .badgeIcon {
+  transform: rotate(360deg) scale(1.15);
+  box-shadow: 
+    0 4px 15px rgba(85, 139, 47, 0.5),
+    inset 0 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+.badgeText {
+  font-family: var(--font-playfair), serif;
+  font-weight: 600;
+  /* 4. Elegant Typography Feel - Playfair Display */
+  letter-spacing: 0.5px; 
+  background: linear-gradient(135deg, 
+    var(--primary-green-dark) 0%, 
+    var(--primary-green) 50%,
+    var(--primary-green-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.8));
+  transition: all 0.3s ease;
+}
+
+.qualityBadge:hover .badgeText {
+  letter-spacing: 0.8px; /* Expands more elegantly */
+  filter: drop-shadow(0 1px 4px rgba(255, 255, 255, 0.9));
+}
+
+.badgeDivider {
+  color: rgba(107, 155, 78, 0.5);
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+
+.badgeLink {
+  color: var(--primary-green);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.badgeLink::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    var(--primary-green) 0%, 
+    var(--primary-green-dark) 100%);
+  transition: width 0.4s ease;
+  opacity: 0.7;
+}
+
+.badgeLink:hover {
+  color: var(--primary-green-dark);
+  transform: translateX(3px);
+}
+
+.badgeLink:hover::after {
+  width: 100%;
+}

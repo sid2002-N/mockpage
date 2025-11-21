@@ -1,42 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Premium Green Palette */
+  --primary-green: #7BA05B;
+  --primary-green-dark: #5D8642;
+  --primary-green-light: #9BC47D;
+
+  /* Accent Colors */
+  --accent-gold: #D4AF37;
+  --accent-gold-light: #E8C547;
+
+  /* Text Colors */
+  --text-charcoal: #2C2C2C;
+  --text-dark: #1a1a1a;
+  --text-gray: #666;
+  --text-light: #999;
+
+  /* Background Colors */
+  --bg-cream: #FDFBF7;
+  --bg-light: #F8F6F3;
+  --bg-white: #ffffff;
+
+  /* Border Colors */
+  --border-subtle: rgba(123, 160, 91, 0.15);
+  --border-color: #e8e6e3;
+
+  /* Status Colors */
+  --star-yellow: #ffc107;
+  --discount-red: #e53935;
+
+  /* Shadow Colors */
+  --shadow-green: rgba(123, 160, 91, 0.12);
+  --shadow-dark: rgba(0, 0, 0, 0.06);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-cream);
+  color: var(--text-charcoal);
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: 0.01em;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+input {
+  font-family: inherit;
+  outline: none;
 }
 
 a {
-  color: inherit;
   text-decoration: none;
+  color: inherit;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+ul {
+  list-style: none;
 }
