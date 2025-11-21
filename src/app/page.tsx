@@ -1,19 +1,49 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './page.module.css';
-import { FiMenu, FiSearch, FiUser, FiHeart } from 'react-icons/fi';
+import { FiMenu, FiSearch, FiUser, FiHeart, FiMoon, FiSun } from 'react-icons/fi';
 import { AiFillStar } from 'react-icons/ai';
 import QualityBadge from './components/QualityBadge';
+
+type Theme = 'light' | 'dark';
+type ProductImage = '/mushroom-leather-main.png' | '/mushroom-leather-detail.png';
 
 export default function ProductPage() {
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
+  const [theme, setTheme] = useState<Theme>('light');
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const storedTheme = localStorage.getItem('theme') as Theme | null;
+    if (storedTheme) {
+      setTheme(storedTheme);
+      document.documentElement.setAttribute('data-theme', storedTheme);
+      return;
+    }
+
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme: Theme = prefersDark ? 'dark' : 'light';
+    setTheme(initialTheme);
+    document.documentElement.setAttribute('data-theme', initialTheme);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+  };
 
   const incrementQuantity = () => setQuantity(prev => Math.min(prev + 1, 49));
   const decrementQuantity = () => setQuantity(prev => Math.max(prev - 1, 1));
 
-  const productImages = [
+  const productImages: ProductImage[] = [
     '/mushroom-leather-main.png',
     '/mushroom-leather-detail.png',
   ];
@@ -54,6 +84,15 @@ export default function ProductPage() {
             <FiUser size={20} />
           </div>
           <span>Hello, Sid</span>
+          <button
+            className={styles.themeToggle}
+            onClick={toggleTheme}
+            type="button"
+            aria-label="Toggle color theme"
+          >
+            {theme === 'light' ? <FiMoon size={18} /> : <FiSun size={18} />}
+            <span>{theme === 'light' ? 'Dark' : 'Light'}</span>
+          </button>
         </div>
       </header>
 
